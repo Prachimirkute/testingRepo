@@ -58,6 +58,7 @@ import Card from "./Card.vue";
 import Sidebar from "./Sidebar.vue";
 import userData from "@/db.json";
 import { sidebarWidth } from "./State";
+import axios from "axios";
 export default {
   name: "Home",
   components: {
@@ -69,8 +70,22 @@ export default {
   },
   data() {
     return {
-      users: userData,
+      users: [],
     };
+  },
+  mounted() {
+    this.fetchProducts();
+  },
+  methods: {
+    async fetchProducts() {
+      try {
+        const response = await axios.get("http://localhost:3000/users");
+        console.log(response.data);
+        this.users = response.data;
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    },
   },
 };
 </script>
