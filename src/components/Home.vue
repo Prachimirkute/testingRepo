@@ -1,7 +1,7 @@
 <template>
   <div class="Home">
     <Sidebar />
-    <div class="mainContent">
+    <div :style="{ 'margin-left': sidebarWidth }" class="mainContent">
       <div class="Title">Online Ordering Platform</div>
       <div class="Labels">
         <div class="label">
@@ -57,11 +57,15 @@
 import Card from "./Card.vue";
 import Sidebar from "./Sidebar.vue";
 import userData from "@/db.json";
+import { sidebarWidth } from "./State";
 export default {
   name: "Home",
   components: {
     Sidebar,
     Card,
+  },
+  setup() {
+    return { sidebarWidth };
   },
   data() {
     return {
@@ -74,8 +78,14 @@ export default {
 .Home {
   display: flex;
 }
+.Home::-webkit-scrollbar {
+  display: none;
+}
 .mainContent {
   width: calc(100vw - 60px);
+}
+.mainContent::-webkit-scrollbar {
+  display: none;
 }
 .Title {
   width: 80%;
